@@ -1,0 +1,119 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2026-02-08 11:55:49.051710",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "vehicle_details",
+  "country",
+  "vehicle_type",
+  "plate_no",
+  "owner_details",
+  "owner_type",
+  "qid",
+  "company_id",
+  "system",
+  "lookup_results",
+  "status",
+  "lookup"
+ ],
+ "fields": [
+  {
+   "fieldname": "vehicle_details",
+   "fieldtype": "Section Break",
+   "label": "Vehicle Details"
+  },
+  {
+   "default": "QATAR",
+   "fieldname": "country",
+   "fieldtype": "Select",
+   "label": "Country",
+   "options": "QATAR\nSAUDI ARABIA\nOMAN\nJORDAN"
+  },
+  {
+   "default": "PRIVATE VEHICLE",
+   "fieldname": "vehicle_type",
+   "fieldtype": "Select",
+   "label": "Vehicle Type",
+   "options": "PRIVATE VEHICLE\nGOVERNMENT VEHICLE\nDIPLOMATIC VEHICLE\nPRIVATE MOTORCYCLE\nTAXI\nCOMMERCIAL VEHICLE\nPRIVATE TRANSPORTATION\nHEAVY EQUIPMENT\nTRAILERS\nPUBLIC TRANSPORTATION\nUNITED NATIONS\nEXPORT PLATE\nGOVERNMENT MECHANICAL\nTESTING PLATE\nGOVERNMENT TRAILERS\nLIMOUSINE\nTEMPORARY ENTRY\nEQUIPMENT"
+  },
+  {
+   "fieldname": "owner_details",
+   "fieldtype": "Section Break",
+   "label": "Owner Details"
+  },
+  {
+   "fieldname": "owner_type",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Owner Type",
+   "options": "Individual\nCompany",
+   "reqd": 1
+  },
+  {
+   "fieldname": "qid",
+   "fieldtype": "Data",
+   "label": "QID"
+  },
+  {
+   "fieldname": "company_id",
+   "fieldtype": "Data",
+   "label": "Company ID"
+  },
+  {
+   "fieldname": "system",
+   "fieldtype": "Section Break",
+   "label": "System"
+  },
+  {
+   "fieldname": "lookup_results",
+   "fieldtype": "Long Text",
+   "label": "Lookup  Results"
+  },
+  {
+   "fieldname": "status",
+   "fieldtype": "Data",
+   "label": "Status"
+  },
+  {
+   "fieldname": "lookup",
+   "fieldtype": "Button",
+   "label": "Lookup"
+  },
+  {
+   "fieldname": "plate_no",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Plate Number",
+   "reqd": 1
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2026-02-10 20:46:44.810437",
+ "modified_by": "Administrator",
+ "module": "Traffic Violations V2",
+ "name": "Violation Query",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "row_format": "Dynamic",
+ "rows_threshold_for_grid_search": 20,
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}
