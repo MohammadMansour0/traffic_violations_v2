@@ -5,6 +5,10 @@ app_description = "App to check traffic violations on vehicle"
 app_email = "mohamadhamdan086@gmail.com"
 app_license = "mit"
 
+
+doctype_list_js = {
+    "Item": "public/js/item_list.js"
+}
 # Apps
 # ------------------
 
