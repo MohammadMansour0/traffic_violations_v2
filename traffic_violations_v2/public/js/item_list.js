@@ -97,7 +97,7 @@ frappe.listview_settings['Item'] = {
 
                         args: {
                             plate: values.plate,
-                            vehicle_type: values.vehicle_type,   // PRV, PRT, etc.
+                            vehicle_type: values.vehicle_type,
                             qid: values.owner_type === "Individual" ? values.qid : null,
                             company_id: values.owner_type === "Company" ? values.company_id : null
                         },
@@ -108,8 +108,10 @@ frappe.listview_settings['Item'] = {
                         callback(r) {
                             if (!r.message) return;
 
-                            // 🔥 specific error handling
-                            if (r.message.status === "invalid_id") {
+                            const res = r.message;
+
+                            // 🔴 Invalid ID
+                            if (res.status === "invalid_id") {
                                 frappe.msgprint({
                                     title: "Invalid ID",
                                     message: "The entered ID is invalid.",
@@ -118,7 +120,8 @@ frappe.listview_settings['Item'] = {
                                 return;
                             }
 
-                            if (r.message.status === "invalid_plate") {
+                            // 🔴 Invalid Plate
+                            if (res.status === "invalid_plate") {
                                 frappe.msgprint({
                                     title: "Invalid Plate",
                                     message: "Type of Vehicle / Plate Number is invalid.",
@@ -127,20 +130,54 @@ frappe.listview_settings['Item'] = {
                                 return;
                             }
 
-                            if (r.message.status === "error") {
+                            // 🟢 Clean vehicle
+                            if (res.status === "clean") {
                                 frappe.msgprint({
-                                    title: "MOI Error",
-                                    message: "An unknown error occurred during lookup.",
-                                    indicator: "orange"
+                                    title: "MOI Result",
+                                    message: "✅ No traffic violations found.",
+                                    indicator: "green"
                                 });
                                 return;
                             }
 
-                            // ✅ success case
+                            // 🟠 Violations found (⭐ USER-FRIENDLY)
+                            if (res.status === "violations found") {
+
+                                let html = `
+                                    <div>
+                                        <p><b>Total Violations:</b> ${res.violations.length}</p>
+                                        <hr>
+                                `;
+
+                                res.violations.forEach(v => {
+                                    html += `
+                                        <div style="margin-bottom:12px;">
+                                            <b>#${v.violation_no}</b><br>
+                                            📅 ${v.date}<br>
+                                            📝 ${v.description}<br>
+                                            💰 <b>${v.amount}</b>
+                                        </div>
+                                        <hr>
+                                    `;
+                                });
+
+                                html += `</div>`;
+
+                                frappe.msgprint({
+                                    title: "Traffic Violations",
+                                    message: html,
+                                    indicator: "orange",
+                                    wide: true
+                                });
+
+                                return;
+                            }
+
+                            // ⚠️ Fallback
                             frappe.msgprint({
-                                title: "MOI Result",
-                                message: `<pre>${JSON.stringify(r.message, null, 2)}</pre>`,
-                                indicator: "blue"
+                                title: "MOI Error",
+                                message: "An unknown error occurred during lookup.",
+                                indicator: "orange"
                             });
                         }
                     });

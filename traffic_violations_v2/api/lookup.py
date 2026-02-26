@@ -71,7 +71,7 @@ def select_owner_type(driver, wait, company_id=None):
             company_radio
         )
 
-        time.sleep(0.5)
+        time.sleep(0.2)
 
         # ✅ JS click (bypasses interception)
         driver.execute_script(
@@ -84,7 +84,7 @@ def select_owner_type(driver, wait, company_id=None):
             EC.presence_of_element_located((By.ID, "ownerQid"))
         )
 
-        time.sleep(0.8)
+        time.sleep(0.5)
         
 
 def fill_company_id(driver, wait, company_id):
@@ -151,7 +151,7 @@ def fill_vehicle_info(driver, wait, plate, qid=None, company_id=None, vehicle_ty
 
 
 
-def human_pause(min_s=0.3, max_s=1.2):
+def human_pause(min_s=0.3, max_s=0.8):
     time.sleep(random.uniform(min_s, max_s))
 
 def capture_captcha_from_browser(driver, wait):
@@ -161,7 +161,7 @@ def capture_captcha_from_browser(driver, wait):
 
     # Scroll into view (important)
     driver.execute_script("arguments[0].scrollIntoView(true);", element)
-    time.sleep(0.5)
+    time.sleep(0.2)
 
     filename = f"captcha_{uuid.uuid4().hex}.png"
     save_path = os.path.join("/tmp", filename)
@@ -320,7 +320,7 @@ def wait_for_results(driver, wait):
         )
 
         # ⭐ small stabilization pause (important)
-        time.sleep(0.8)
+        time.sleep(0.3)
 
     except TimeoutException:
         with open("/tmp/moi_timeout.html", "w", encoding="utf-8") as f:
