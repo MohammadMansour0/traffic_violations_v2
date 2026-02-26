@@ -31,7 +31,7 @@ def get_ocr_reader():
 
 def build_driver():
     options = Options()
-    #options.add_argument("--headless=new")      # newer headless
+    options.add_argument("--headless=new")      # newer headless
     options.add_argument("--no-sandbox")
     options.add_argument("--disable-dev-shm-usage")
     options.add_argument("--window-size=1400,900")
